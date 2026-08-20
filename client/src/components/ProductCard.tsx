@@ -40,7 +40,7 @@ export default function ProductCard({ product }: { product: Product }) {
         </div>
         <button type="button" onClick={add} disabled={!product.available} className="add-to-cart-button">
           <ShoppingCart size={18} />
-          {product.available ? "أضف لطلب السعر" : "غير متوفر حالياً"}
+          {product.available ? "اضف الى السلة" : "غير متوفر حالياً"}
         </button>
       </div>
     </article>

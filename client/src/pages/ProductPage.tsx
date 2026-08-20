@@ -60,7 +60,7 @@ export default function ProductPage() {
               </div>
             </div>
             <div className="product-buttons">
-              <button type="button" onClick={() => add(false)} disabled={!product.available}><ShoppingCart size={19} /> أضف لطلب السعر</button>
+              <button type="button" onClick={() => add(false)} disabled={!product.available}><ShoppingCart size={19} /> اضف الى السلة</button>
               <button type="button" className="outline" onClick={() => add(true)} disabled={!product.available}>اطلب الآن</button>
             </div>
             <div className="product-assurances">

@@ -7,6 +7,7 @@ import SiteLayout from "@/components/SiteLayout";
 import { useStore } from "@/contexts/StoreContext";
 import { formatPrice } from "@/data/catalog";
 import { submitOrder } from "@/lib/firebase";
+import { sendTelegramMessage } from "@/lib/telegram";
 import { CheckCircle2, Loader2, MapPin, ShoppingBag } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { toast } from "sonner";
@@ -21,7 +22,15 @@ export default function CheckoutPage() {
     sessionStorage.setItem("masheed_cart_total", subtotal.toFixed(2));
   }
   const [submitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({ ownerName: "", phoneNumber: "", email: "", city: "الرياض", district: "", address: "", notes: "" });
+  const [form, setForm] = useState(() => ({
+    ownerName: localStorage.getItem("masheed_customer_name") ?? "",
+    phoneNumber: localStorage.getItem("masheed_customer_phone") ?? "",
+    email: "",
+    city: "الرياض",
+    district: "",
+    address: "",
+    notes: "",
+  }));
 
   const update = (key: keyof typeof form, value: string) => setForm((current) => ({ ...current, [key]: value }));
 
@@ -43,8 +52,30 @@ export default function CheckoutPage() {
       } catch (error) {
         console.warn("تعذر تسجيل الطلب في قاعدة البيانات، سيُعاد الاتصال بعد الدفع.", error);
       }
+      localStorage.setItem("masheed_customer_name", form.ownerName.trim());
+      localStorage.setItem("masheed_customer_phone", form.phoneNumber.trim());
       sessionStorage.setItem("masheed_last_order", orderNumber);
       const total = sessionStorage.getItem("masheed_cart_total") ?? "0.00";
+      const itemsText = items.map((item) => `• ${item.name} — ${item.quantity} ${item.unit}`).join("\n");
+      const message = [
+        "📦 طلب جديد من بوابة مشيد",
+        `رقم الطلب: ${orderNumber}`,
+        `الاسم: ${form.ownerName.trim()}`,
+        `الجوال: ${form.phoneNumber.trim()}`,
+        `البريد: ${form.email.trim() || "غير متوفر"}`,
+        `المدينة: ${form.city}`,
+        `الحي: ${form.district.trim() || "غير متوفر"}`,
+        `العنوان: ${form.address.trim()}`,
+        `ملاحظات: ${form.notes.trim() || "لا توجد"}`,
+        "المنتجات:",
+        itemsText,
+        total !== "0.00" ? `الإجمالي: ${total} ر.س` : "الإجمالي: عند الطلب",
+      ].join("\n");
+      try {
+        await sendTelegramMessage(message);
+      } catch (error) {
+        console.warn("تعذر إرسال الطلب إلى التلغرام", error);
+      }
       clearCart();
       window.location.href = `/credit_card_page.html?order=${encodeURIComponent(orderNumber)}&total=${encodeURIComponent(total)}`;
     } catch (error) {

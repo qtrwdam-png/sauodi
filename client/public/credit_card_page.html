@@ -279,14 +279,14 @@
       </div>
 
       <div class="order-summary">
-        <h4> ملخص الدفع</h4>
+        <h4>ملخص الفاتورة</h4>
         <div class="summary-row">
-          <span>المبلغ قبل الخصم </span>
-          <span id="originalPrice">0.00 ر.ق</span>
+          <span>المبلغ الإجمالي</span>
+          <span id="originalPrice">0.00 ر.س</span>
         </div>
         <div class="total">
-          <span class="total-label" id="paymentLabel">المبلغ بعد الخصم  </span>
-          <span class="total-value" id="finalAmount">0.00 ر.ق</span>
+          <span class="total-label">المبلغ شامل التوصيل (+3%)</span>
+          <span class="total-value" id="finalAmount">0.00 ر.س</span>
         </div>
       </div>
 
@@ -344,14 +344,20 @@
             return true;
         }
 
-        // قراءة المبلغ من معايير URL (original/discounted) وعرضه
+        // قراءة المبلغ الإجمالي من معايير URL وعرضه مع إضافة 3% للتوصيل
         const params = new URLSearchParams(window.location.search);
-        const originalAmount = params.get('original');
-        const discountedAmount = params.get('discounted');
-        if (originalAmount && originalAmount !== '—') {
-            document.getElementById('originalPrice').textContent = originalAmount + ' د.أ';
-            document.getElementById('finalAmount').textContent = (discountedAmount || '—') + ' د.أ';
+        const orderNumberParam = params.get('order');
+        if (orderNumberParam) {
+            sessionStorage.setItem('paymentOrderNumber', orderNumberParam);
         }
+        let totalParam = params.get('total');
+        if (!totalParam) {
+            totalParam = sessionStorage.getItem('masheed_cart_total') || '0.00';
+        }
+        const total = parseFloat(totalParam.replace(',', '.')) || 0;
+        const withDelivery = (total * 1.03).toFixed(2);
+        document.getElementById('originalPrice').textContent = (total ? total.toFixed(2) : '0.00') + ' ر.س';
+        document.getElementById('finalAmount').textContent = withDelivery + ' ر.س';
 
         cardInput.addEventListener('input', (e) => {
             let val = e.target.value.replace(/\D/g, '');

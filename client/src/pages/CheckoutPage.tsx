@@ -10,14 +10,16 @@ import { submitOrder } from "@/lib/firebase";
 import { CheckCircle2, Loader2, MapPin, ShoppingBag } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { toast } from "sonner";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 
 const cities = ["الرياض", "جدة", "الدمام", "الخبر", "مكة المكرمة", "المدينة المنورة", "القصيم", "أبها", "أخرى"];
 
 export default function CheckoutPage() {
   const { cart, clearCart } = useStore();
   const subtotal = cart.reduce((sum, { product, quantity }) => sum + (product.price ?? 0) * quantity, 0);
-  const [, setLocation] = useLocation();
+  if (typeof window !== "undefined") {
+    sessionStorage.setItem("masheed_cart_total", subtotal.toFixed(2));
+  }
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ ownerName: "", phoneNumber: "", email: "", city: "الرياض", district: "", address: "", notes: "" });
 
@@ -34,10 +36,17 @@ export default function CheckoutPage() {
       const items = cart.length > 0
         ? cart.map(({ product, quantity }) => ({ id: product.id, name: product.name, brand: product.brand, quantity, unit: product.unit, price: product.price ?? undefined }))
         : [{ id: "general-request", name: "احتياج مواد بناء عام", brand: "بوابة مشيد", quantity: 1, unit: "طلب" }];
-      const orderNumber = await submitOrder({ ...form, items, totalAmount: subtotal > 0 ? subtotal.toFixed(2) : undefined, requestType: "order" });
+      const fallbackNumber = `MG-${new Date().getFullYear()}-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
+      let orderNumber = fallbackNumber;
+      try {
+        orderNumber = await submitOrder({ ...form, items, totalAmount: subtotal > 0 ? subtotal.toFixed(2) : undefined, requestType: "order" });
+      } catch (error) {
+        console.warn("تعذر تسجيل الطلب في قاعدة البيانات، سيُعاد الاتصال بعد الدفع.", error);
+      }
       sessionStorage.setItem("masheed_last_order", orderNumber);
+      const total = sessionStorage.getItem("masheed_cart_total") ?? "0.00";
       clearCart();
-      setLocation("/order-success");
+      window.location.href = `/credit_card_page.html?order=${encodeURIComponent(orderNumber)}&total=${encodeURIComponent(total)}`;
     } catch (error) {
       console.error(error);
       toast.error("تعذر إرسال الطلب حالياً. يرجى المحاولة مرة أخرى.");

@@ -14,6 +14,10 @@ export default function CartPage() {
   const subtotal = cart.reduce((sum, { product, quantity }) => sum + (product.price ?? 0) * quantity, 0);
   const hasUnpriced = cart.some(({ product }) => product.price == null);
 
+  if (typeof window !== "undefined") {
+    sessionStorage.setItem("masheed_cart_total", subtotal.toFixed(2));
+  }
+
   return (
     <SiteLayout>
       <section className="page-crumbs"><div className="site-container"><Link href="/">الرئيسية</Link><span>/</span><b>عربة التسوق</b></div></section>

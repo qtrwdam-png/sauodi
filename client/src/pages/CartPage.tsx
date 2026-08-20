@@ -43,7 +43,7 @@ export default function CartPage() {
                       <input value={quantity} onChange={(event) => updateQuantity(product.id, Number(event.target.value) || 1)} aria-label={`كمية ${product.name}`} />
                       <button type="button" onClick={() => updateQuantity(product.id, quantity + 1)}><Plus size={14} /></button>
                     </div>
-                    <div className="cart-status">{product.price != null ? formatPrice(product.price * quantity) : "السعر عند الطلب"}</div>
+                    <div className="cart-status">{product.price != null ? formatPrice(product.price * quantity) : "السعر  "}</div>
                     <button className="remove-cart-item" type="button" onClick={() => removeFromCart(product.id)} aria-label={`حذف ${product.name}`}><Trash2 size={19} /></button>
                   </article>
                 ))}
@@ -55,7 +55,7 @@ export default function CartPage() {
                 <div><span>إجمالي الوحدات</span><b>{cartCount}</b></div>
                 {subtotal > 0 && <div><span>إجمالي المنتجات المسعّرة</span><b>{formatPrice(subtotal)}</b></div>}
                 <div className="summary-note"><strong>{subtotal > 0 && !hasUnpriced ? "الإجمالي التقريبي" : "التكلفة النهائية"}</strong><p>{hasUnpriced || subtotal === 0 ? "بعض المنتجات تُسعّر عند الطلب؛ يتم تأكيد السعر والتوصيل بعد مراجعة الكمية وموقع المشروع." : "يشمل المنتجات المسعّرة، ويُؤكد التوصيل بعد مراجعة موقع المشروع."}</p></div>
-                <Link href="/checkout" className="checkout-link">متابعة طلب عرض السعر</Link>
+                <Link href="/checkout" className="checkout-link">متابعة الطلب  </Link>
               </aside>
             </div>
           )}

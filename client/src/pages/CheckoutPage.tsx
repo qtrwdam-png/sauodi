@@ -115,7 +115,7 @@ export default function CheckoutPage() {
                 <div className="checkout-item" key={product.id}><img src={product.image} alt="" /><div><b>{product.name}</b><span>{quantity} × {product.unit}</span>{product.price != null && <span className="checkout-item-price">{formatPrice(product.price * quantity)}</span>}</div></div>
               )) : <div className="general-request-note">سيُرسل طلب احتياج عام، ويمكنك كتابة المواد والكميات في خانة الملاحظات.</div>}
               {subtotal > 0 && <div className="checkout-total"><span>الإجمالي التقريبي</span><b>{formatPrice(subtotal)}</b></div>}
-              <div className="checkout-price-note"><b>{subtotal > 0 ? "إجمالي المنتجات المسعّرة" : "السعر  "}</b><p>سيتواصل فريق الخدمة بعد مراجعة التفاصيل لتأكيد السعر وموعد التوريد.</p></div>
+              <div className="checkout-price-note"><b>{subtotal > 0 ? "إجمالي المنتجات المسعّرة" : "السعر  "}</b><p>سيتواصل فريق الخدمة بعد مراجعة التفاصيل لتأكيد موعد التوريد.</p></div>
             </aside>
           </div>
         </div>

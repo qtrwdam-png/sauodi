@@ -91,11 +91,11 @@ export default function CheckoutPage() {
       <section className="page-crumbs"><div className="site-container"><Link href="/">الرئيسية</Link><span>/</span><Link href="/checkout/cart">عربة التسوق</Link><span>/</span><b>إتمام الطلب</b></div></section>
       <section className="checkout-page page-pad">
         <div className="site-container">
-          <h1 className="page-title">طلب عرض السعر</h1>
+          <h1 className="page-title">اكمل طلبك  </h1>
           <div className="checkout-grid">
             <form className="checkout-form" onSubmit={submit}>
               <div className="form-card">
-                <div className="form-card-title"><MapPin size={22} /><div><h2>بيانات التواصل وموقع المشروع</h2><p>أدخل البيانات اللازمة لتجهيز عرض السعر والتوريد.</p></div></div>
+                <div className="form-card-title"><MapPin size={22} /><div><h2>بيانات التواصل وموقع المشروع</h2><p>أدخل البيانات اللازمة لتجهيز الطلب والتوريد.</p></div></div>
                 <div className="form-grid">
                   <label className="full"><span>الاسم الكامل *</span><input required value={form.ownerName} onChange={(event) => update("ownerName", event.target.value)} placeholder="الاسم الكامل" /></label>
                   <label><span>رقم الجوال *</span><input required dir="ltr" inputMode="tel" value={form.phoneNumber} onChange={(event) => update("phoneNumber", event.target.value)} placeholder="05xxxxxxxx" /></label>
@@ -106,7 +106,7 @@ export default function CheckoutPage() {
                   <label className="full"><span>ملاحظات الطلب</span><textarea rows={4} value={form.notes} onChange={(event) => update("notes", event.target.value)} placeholder="اذكر أي تفاصيل عن الكميات أو وقت التوريد" /></label>
                 </div>
               </div>
-              <button type="submit" className="submit-order-button" disabled={submitting}>{submitting ? <Loader2 className="spin" size={20} /> : <CheckCircle2 size={20} />} إرسال طلب عرض السعر</button>
+              <button type="submit" className="submit-order-button" disabled={submitting}>{submitting ? <Loader2 className="spin" size={20} /> : <CheckCircle2 size={20} />} متابعة   </button>
             </form>
 
             <aside className="checkout-summary">
@@ -115,7 +115,7 @@ export default function CheckoutPage() {
                 <div className="checkout-item" key={product.id}><img src={product.image} alt="" /><div><b>{product.name}</b><span>{quantity} × {product.unit}</span>{product.price != null && <span className="checkout-item-price">{formatPrice(product.price * quantity)}</span>}</div></div>
               )) : <div className="general-request-note">سيُرسل طلب احتياج عام، ويمكنك كتابة المواد والكميات في خانة الملاحظات.</div>}
               {subtotal > 0 && <div className="checkout-total"><span>الإجمالي التقريبي</span><b>{formatPrice(subtotal)}</b></div>}
-              <div className="checkout-price-note"><b>{subtotal > 0 ? "إجمالي المنتجات المسعّرة" : "السعر عند الطلب"}</b><p>سيتواصل فريق الخدمة بعد مراجعة التفاصيل لتأكيد السعر وموعد التوريد.</p></div>
+              <div className="checkout-price-note"><b>{subtotal > 0 ? "إجمالي المنتجات المسعّرة" : "السعر  "}</b><p>سيتواصل فريق الخدمة بعد مراجعة التفاصيل لتأكيد السعر وموعد التوريد.</p></div>
             </aside>
           </div>
         </div>

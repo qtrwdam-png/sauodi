@@ -61,7 +61,7 @@ export default function Header() {
       <div className="desktop-main-head">
         <div className="site-container main-head-inner">
           <Link href="/" className="brand-logo" aria-label="بوابة مشيد">
-            <img src="/manus-storage/masheed-logo_fe02568b.png" alt="بوابة مشيد Masheed Gate" />
+            <img src="/images/site/masheed-logo.png" alt="بوابة مشيد Masheed Gate" />
           </Link>
 
           <div className="mega-trigger-wrap">
@@ -144,7 +144,7 @@ export default function Header() {
           <Menu size={26} />
         </button>
         <Link href="/" className="mobile-logo">
-          <img src="/manus-storage/masheed-logo_fe02568b.png" alt="بوابة مشيد" />
+          <img src="/images/site/masheed-logo.png" alt="بوابة مشيد" />
         </Link>
         <div className="mobile-icons">
           <Link href="/customer/login" aria-label="الحساب"><UserRound size={22} /></Link>
@@ -168,7 +168,7 @@ export default function Header() {
       <div className={`mobile-menu-overlay ${mobileOpen ? "open" : ""}`} onClick={() => setMobileOpen(false)} />
       <aside className={`mobile-drawer ${mobileOpen ? "open" : ""}`} aria-hidden={!mobileOpen}>
         <div className="mobile-drawer-head">
-          <img src="/manus-storage/masheed-logo_fe02568b.png" alt="بوابة مشيد" />
+          <img src="/images/site/masheed-logo.png" alt="بوابة مشيد" />
           <button type="button" onClick={() => setMobileOpen(false)} aria-label="إغلاق القائمة"><X size={24} /></button>
         </div>
         <div className="mobile-account-row">

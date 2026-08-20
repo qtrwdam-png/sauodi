@@ -3,7 +3,7 @@
  * بصور واضحة وحالة توفر صريحة وزر طلب غير مبالغ في زخرفته.
  */
 
-import type { Product } from "@/data/catalog";
+import { formatPrice, type Product } from "@/data/catalog";
 import { useStore } from "@/contexts/StoreContext";
 import { Check, ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
@@ -29,7 +29,11 @@ export default function ProductCard({ product }: { product: Product }) {
         <div className="product-unit">الوحدة: {product.unit}</div>
         <div className="product-price-status">
           {product.available ? (
-            <><Check size={16} /><span>السعر عند الطلب</span></>
+            product.price != null ? (
+              <strong className="product-price">{formatPrice(product.price)}</strong>
+            ) : (
+              <><Check size={16} /><span>السعر عند الطلب</span></>
+            )
           ) : (
             <span>هذا المنتج سيتوفر قريباً</span>
           )}

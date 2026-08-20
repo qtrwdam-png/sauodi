@@ -230,6 +230,7 @@ export default defineConfig({
       ".manus-asia.computer",
       ".manuscomputer.ai",
       ".manusvm.computer",
+      ".all-hands.dev",
       "localhost",
       "127.0.0.1",
     ],
@@ -237,5 +238,10 @@ export default defineConfig({
       strict: true,
       deny: ["**/.*"],
     },
+  },
+  preview: {
+    port: 12000,
+    host: true,
+    allowedHosts: [".all-hands.dev", "localhost", "127.0.0.1"],
   },
 });

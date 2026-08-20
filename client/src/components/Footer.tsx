@@ -12,7 +12,7 @@ export default function Footer() {
     <footer className="site-footer" dir="rtl">
       <div className="site-container footer-grid">
         <section className="footer-brand">
-          <img src="/manus-storage/masheed-logo_fe02568b.png" alt="بوابة مشيد" />
+          <img src="/images/site/masheed-footer.png" alt="بوابة مشيد" />
           <p>بوابتك لشراء مواد البناء وتوريدها إلى موقع مشروعك بكل سهولة.</p>
           <a href="tel:+966920011534"><Phone size={17} /><span dir="ltr">+966 920011534</span></a>
           <a href="mailto:Care@masheedGate.com"><Mail size={17} />Care@masheedGate.com</a>
@@ -55,11 +55,9 @@ export default function Footer() {
       </div>
 
       <div className="site-container trust-row">
-        <a href="https://maroof.sa/166752" target="_blank" rel="noreferrer">
-          <img className="maroof-logo" src="/manus-storage/maroof_32acd46c.png" alt="معروف" />
-        </a>
-        <img className="payment-logos" src="/manus-storage/credit-cards-rtl_4a97cf71.png" alt="وسائل الدفع" />
-        <img className="bank-logo" src="/manus-storage/al-rajhi-bank_b15dac7b.svg" alt="مصرف الراجحي" />
+        <img className="payment-logos" src="/images/site/payment-types.png" alt="وسائل الدفع" />
+        <img className="store-badge" src="/images/site/app-store.png" alt="متوفر على App Store" />
+        <img className="store-badge" src="/images/site/google-store.png" alt="متوفر على Google Play" />
       </div>
 
       <div className="copyright">

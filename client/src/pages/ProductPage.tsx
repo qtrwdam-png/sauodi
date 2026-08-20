@@ -6,7 +6,7 @@
 import ProductCard from "@/components/ProductCard";
 import SiteLayout from "@/components/SiteLayout";
 import { useStore } from "@/contexts/StoreContext";
-import { getProduct, products } from "@/data/catalog";
+import { formatPrice, getProduct, products } from "@/data/catalog";
 import { Check, ChevronLeft, Minus, Plus, ShieldCheck, ShoppingCart, Truck } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -42,7 +42,14 @@ export default function ProductPage() {
               {product.available ? <><Check size={16} /> متوفر لطلب عرض سعر</> : "هذا المنتج سيتوفر قريباً"}
             </div>
             <p className="product-summary">{product.summary}</p>
-            <div className="quote-price"><span>السعر</span><strong>عند الطلب</strong><small>يُحدد حسب الكمية وموقع المشروع</small></div>
+            <div className="quote-price">
+              <span>السعر</span>
+              {product.price != null ? (
+                <><strong>{formatPrice(product.price)}</strong><small>للوحدة الواحدة، شامل ضريبة القيمة المضافة</small></>
+              ) : (
+                <><strong>عند الطلب</strong><small>يُحدد حسب الكمية وموقع المشروع</small></>
+              )}
+            </div>
             <div className="unit-row"><span>وحدة البيع</span><b>{product.unit}</b></div>
             <div className="quantity-row">
               <span>الكمية</span>

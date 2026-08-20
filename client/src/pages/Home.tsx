@@ -10,10 +10,10 @@ import { ArrowLeft, ChevronLeft } from "lucide-react";
 import { Link } from "wouter";
 
 const serviceItems = [
-  { title: "سرعة في الوصول", image: "/manus-storage/feature-speed_6bc947f9.png" },
-  { title: "خدمة العملاء", image: "/manus-storage/feature-support_8d859e86.png" },
-  { title: "طرق دفع متعددة", image: "/manus-storage/feature-payment_c6de1b26.png" },
-  { title: "اطلب احتياجتك", image: "/manus-storage/feature-request_a8ab473c.png" },
+  { title: "سرعة في الوصول", image: "/images/site/free-shippingandall-building-materials-websitebanner.webp" },
+  { title: "خدمة العملاء", image: "/images/site/benefites-websitebanner.webp" },
+  { title: "طرق دفع متعددة", image: "/images/site/multiple-paymentandhigh-quality-websitebanner.webp" },
+  { title: "اطلب احتياجتك", image: "/images/site/building-materials-websitebanner.webp" },
 ];
 
 export default function Home() {
@@ -24,7 +24,7 @@ export default function Home() {
           <div className="hero-main">
             <img
               className="hero-image"
-              src="/manus-storage/masheed-hero-reference_108176db.jpg"
+              src="/images/site/master-banner.webp"
               alt="مواد بناء وتوريد للمشاريع"
             />
             <div className="hero-overlay" />
@@ -33,19 +33,19 @@ export default function Home() {
               <h1>بوابة مشيد لمواد البناء</h1>
               <p>اطلب الأسمنت والرمل والطوب والحديد ومواد التشطيب من موردين متخصصين.</p>
               <div className="hero-actions">
-                <Link href="/categories/cementdelivery" className="hero-primary">تسوق مواد البناء <ArrowLeft size={19} /></Link>
+                <Link href="/categories/grey-cement" className="hero-primary">تسوق مواد البناء <ArrowLeft size={19} /></Link>
                 <Link href="/marketplace" className="hero-secondary">ابدأ البيع</Link>
               </div>
             </div>
           </div>
           <div className="hero-side-cards">
-            <Link href="/categories/glue-adhesives" className="promo-card">
-              <img src="/manus-storage/masheed-brand-banner_d2498313.jpg" alt="مواد اللصق" />
+            <Link href="/categories/construction-finishing" className="promo-card">
+              <img src="/images/site/adhesive-category.webp" alt="مواد اللصق" />
               <span>مواد اللصق والتشطيب</span>
             </Link>
-            <Link href="/categories/voucher" className="promo-card promo-small">
-              <img src="/manus-storage/masheed-campaign_2d981623.jpg" alt="أرض المصنع" />
-              <span>عروض أرض المصنع</span>
+            <Link href="/categories/sand-and-aggregate" className="promo-card promo-small">
+              <img src="/images/site/best-quality-websitebanner.webp" alt="الرمل والكنكري" />
+              <span>الرمل والكنكري</span>
             </Link>
           </div>
         </div>

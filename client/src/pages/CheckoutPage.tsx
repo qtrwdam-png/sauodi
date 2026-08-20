@@ -5,6 +5,7 @@
 
 import SiteLayout from "@/components/SiteLayout";
 import { useStore } from "@/contexts/StoreContext";
+import { formatPrice } from "@/data/catalog";
 import { submitOrder } from "@/lib/firebase";
 import { CheckCircle2, Loader2, MapPin, ShoppingBag } from "lucide-react";
 import { FormEvent, useState } from "react";
@@ -15,6 +16,7 @@ const cities = ["الرياض", "جدة", "الدمام", "الخبر", "مكة 
 
 export default function CheckoutPage() {
   const { cart, clearCart } = useStore();
+  const subtotal = cart.reduce((sum, { product, quantity }) => sum + (product.price ?? 0) * quantity, 0);
   const [, setLocation] = useLocation();
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ ownerName: "", phoneNumber: "", email: "", city: "الرياض", district: "", address: "", notes: "" });
@@ -30,9 +32,9 @@ export default function CheckoutPage() {
     setSubmitting(true);
     try {
       const items = cart.length > 0
-        ? cart.map(({ product, quantity }) => ({ id: product.id, name: product.name, brand: product.brand, quantity, unit: product.unit }))
+        ? cart.map(({ product, quantity }) => ({ id: product.id, name: product.name, brand: product.brand, quantity, unit: product.unit, price: product.price ?? undefined }))
         : [{ id: "general-request", name: "احتياج مواد بناء عام", brand: "بوابة مشيد", quantity: 1, unit: "طلب" }];
-      const orderNumber = await submitOrder({ ...form, items, requestType: "order" });
+      const orderNumber = await submitOrder({ ...form, items, totalAmount: subtotal > 0 ? subtotal.toFixed(2) : undefined, requestType: "order" });
       sessionStorage.setItem("masheed_last_order", orderNumber);
       clearCart();
       setLocation("/order-success");
@@ -70,9 +72,10 @@ export default function CheckoutPage() {
             <aside className="checkout-summary">
               <div className="summary-title"><ShoppingBag size={21} /><h2>تفاصيل الطلب</h2></div>
               {cart.length > 0 ? cart.map(({ product, quantity }) => (
-                <div className="checkout-item" key={product.id}><img src={product.image} alt="" /><div><b>{product.name}</b><span>{quantity} × {product.unit}</span></div></div>
+                <div className="checkout-item" key={product.id}><img src={product.image} alt="" /><div><b>{product.name}</b><span>{quantity} × {product.unit}</span>{product.price != null && <span className="checkout-item-price">{formatPrice(product.price * quantity)}</span>}</div></div>
               )) : <div className="general-request-note">سيُرسل طلب احتياج عام، ويمكنك كتابة المواد والكميات في خانة الملاحظات.</div>}
-              <div className="checkout-price-note"><b>السعر عند الطلب</b><p>سيتواصل فريق الخدمة بعد مراجعة التفاصيل لتأكيد السعر وموعد التوريد.</p></div>
+              {subtotal > 0 && <div className="checkout-total"><span>الإجمالي التقريبي</span><b>{formatPrice(subtotal)}</b></div>}
+              <div className="checkout-price-note"><b>{subtotal > 0 ? "إجمالي المنتجات المسعّرة" : "السعر عند الطلب"}</b><p>سيتواصل فريق الخدمة بعد مراجعة التفاصيل لتأكيد السعر وموعد التوريد.</p></div>
             </aside>
           </div>
         </div>

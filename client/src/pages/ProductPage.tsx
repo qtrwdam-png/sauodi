@@ -22,7 +22,7 @@ export default function ProductPage() {
 
   const add = (goToCart = false) => {
     addToCart(product, quantity);
-    toast.success("تمت إضافة المنتج إلى طلب عرض السعر");
+    toast.success("تمت إضافة المنتج إلى السلة   ");
     if (goToCart) setLocation("/checkout/cart");
   };
 

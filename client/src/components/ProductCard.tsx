@@ -14,7 +14,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
   const add = () => {
     addToCart(product);
-    toast.success("تمت إضافة المنتج إلى عربة طلب عرض السعر");
+    toast.success("تم اضافة الطلب في السلة");
   };
 
   return (

@@ -22,7 +22,7 @@ export default function ProductPage() {
 
   const add = (goToCart = false) => {
     addToCart(product, quantity);
-    toast.success("تمت إضافة المنتج إلى السلة   ");
+    toast.success("تم اضافة الطلب في السلة");
     if (goToCart) setLocation("/checkout/cart");
   };
 
@@ -61,7 +61,7 @@ export default function ProductPage() {
             </div>
             <div className="product-buttons">
               <button type="button" onClick={() => add(false)} disabled={!product.available}><ShoppingCart size={19} /> اضف الى السلة</button>
-              <button type="button" className="outline" onClick={() => add(true)} disabled={!product.available}>اطلب الآن</button>
+              <button type="button" onClick={() => add(true)} disabled={!product.available}>اكمل طلبك</button>
             </div>
             <div className="product-assurances">
               <div><Truck size={23} /><span><b>توريد للمشروع</b><small>حسب المدينة والكمية</small></span></div>

@@ -35,7 +35,7 @@ export default function CategoryPage() {
       <section className="page-crumbs"><div className="site-container"><Link href="/">الرئيسية</Link><span>/</span><b>{category?.name ?? "جميع المنتجات"}</b></div></section>
       <section className="category-hero">
         <div className="site-container category-hero-inner">
-          <div><span>المنتجات</span><h1>{category?.name ?? (search ? `نتائج البحث: ${search}` : "جميع المنتجات")}</h1><p>{category?.description ?? "تصفح مواد البناء المتاحة واطلب عرض سعر مناسب لمشروعك."}</p></div>
+          <div><span>المنتجات</span><h1>{category?.name ?? (search ? `نتائج البحث: ${search}` : "جميع المنتجات")}</h1><p>{category?.description ?? "تصفح مواد البناء المتاحة واطلب المواد  المناسبة لمشروعك."}</p></div>
           {category && <img src={category.image} alt={category.name} />}
         </div>
       </section>

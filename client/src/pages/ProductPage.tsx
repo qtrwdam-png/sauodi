@@ -39,7 +39,7 @@ export default function ProductPage() {
             <span className="product-info-brand">{product.brand}</span>
             <h1>{product.name}</h1>
             <div className={`availability-pill ${product.available ? "available" : "unavailable"}`}>
-              {product.available ? <><Check size={16} /> متوفر لطلب عرض سعر</> : "هذا المنتج سيتوفر قريباً"}
+              {product.available ? <><Check size={16} /> متوفر لطلب </> : "هذا المنتج سيتوفر قريباً"}
             </div>
             <p className="product-summary">{product.summary}</p>
             <div className="quote-price">
